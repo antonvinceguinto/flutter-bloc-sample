@@ -14,15 +14,15 @@ class LoginState extends Equatable {
     required this.status,
   });
 
-  final String email;
-  final String password;
-  final LoginStatus status;
-
   factory LoginState.initial() => const LoginState(
         email: '',
         password: '',
         status: LoginStatus.initial,
       );
+
+  final String email;
+  final String password;
+  final LoginStatus status;
 
   LoginState copyWith({
     String? email,

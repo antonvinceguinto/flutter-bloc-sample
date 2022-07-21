@@ -52,7 +52,6 @@ class TodoView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // TODO(antonguinto): Make widget reusable
             ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

@@ -5,7 +5,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:bloc_vgv_todoapp/app/app.dart';
 import 'package:bloc_vgv_todoapp/features/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 

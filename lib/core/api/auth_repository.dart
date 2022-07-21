@@ -32,7 +32,7 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (e) {}
+    } catch (_) {}
   }
 
   Future<void> loginWithEmailAndPassword({
@@ -44,7 +44,7 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (e) {}
+    } catch (_) {}
   }
 
   Future<void> loginViaGmail() async {
@@ -67,7 +67,7 @@ class AuthRepository {
   Future<void> logOut() async {
     try {
       await _firebaseAuth.signOut();
-    } catch (e) {}
+    } catch (_) {}
   }
 }
 
