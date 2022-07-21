@@ -8,9 +8,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:bloc_vgv_todoapp/core/api/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 
 class AppBlocObserver extends BlocObserver {
