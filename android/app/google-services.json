@@ -1,0 +1,54 @@
+{
+	"project_info": {
+		"project_number": "885272001477",
+		"project_id": "bloc-test-july2022",
+		"storage_bucket": "bloc-test-july2022.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:885272001477:android:0fc804d64dbc540da6a9ac",
+				"android_client_info": {
+					"package_name": "com.gdgapps.anton.bloc_vgv_todoapp.bloc_vgv_todoapp"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "885272001477-g1gglqt0hjlapmbdhedf6cb730d7vp62.apps.googleusercontent.com",
+					"client_type": 1,
+					"android_info": {
+						"package_name": "com.gdgapps.anton.bloc_vgv_todoapp.bloc_vgv_todoapp",
+						"certificate_hash": "97e5811ced35c9b74e6be148da835e5bb738dd0a"
+					}
+				},
+				{
+					"client_id": "885272001477-9j9838c3hs727ats3omidpduef2betfr.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyCsC0JBXM8eWL1KcmFMeUrUMRWi4I8NO04"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "885272001477-9j9838c3hs727ats3omidpduef2betfr.apps.googleusercontent.com",
+							"client_type": 3
+						},
+						{
+							"client_id": "885272001477-grueiqj04t7mbvl054060rhjv52ii98e.apps.googleusercontent.com",
+							"client_type": 2,
+							"ios_info": {
+								"bundle_id": "com.gdgapps.anton.bloc_vgv_todoapp.bloc-vgv-todoapp"
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
+}
