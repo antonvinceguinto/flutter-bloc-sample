@@ -23,25 +23,18 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<LoginCubit, LoginState>(
-        listener: (BuildContext context, state) {
-          if (state.status == LoginStatus.error) {
-            // Error handling
-          }
-        },
-        child: Center(
-          child: BlocBuilder<LoginCubit, LoginState>(
-            buildWhen: (previous, current) => previous.status != current.status,
-            builder: (context, state) {
-              if (state.status == LoginStatus.submitting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return ElevatedButton(
-                child: const Text('Login via Gmail'),
-                onPressed: () => context.read<LoginCubit>().loginWithGmail(),
-              );
-            },
-          ),
+      body: Center(
+        child: BlocBuilder<LoginCubit, LoginState>(
+          buildWhen: (previous, current) => previous.status != current.status,
+          builder: (context, state) {
+            if (state.status == LoginStatus.submitting) {
+              return const CircularProgressIndicator();
+            }
+            return ElevatedButton(
+              child: const Text('Login via Gmail'),
+              onPressed: () => context.read<LoginCubit>().loginWithGmail(),
+            );
+          },
         ),
       ),
     );
