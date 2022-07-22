@@ -1,4 +1,4 @@
-import 'package:bloc_vgv_todoapp/core/api/auth_repository.dart';
+import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/features/counter/counter.dart';
 import 'package:bloc_vgv_todoapp/features/login/view/login_page.dart';
 import 'package:flutter/material.dart';

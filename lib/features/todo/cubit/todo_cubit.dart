@@ -1,10 +1,15 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'todo_state.dart';
 
 class TodoCubit extends Cubit<List<TodoState>> {
-  TodoCubit() : super([]);
+  TodoCubit() : super([]) {
+    _repository.retrieveTodos().then(emit);
+  }
+
+  final _repository = FirestoreRepositoryImpl();
 
   void add(String title) {
     final id = DateTime.now().millisecondsSinceEpoch.toString();
@@ -22,6 +27,9 @@ class TodoCubit extends Cubit<List<TodoState>> {
           TodoState(id: id, title: title),
         ),
     );
+
+    // Add to firestore
+    _repository.addTodoData(TodoState(id: id, title: title));
   }
 
   void toggle(String id) {
@@ -36,6 +44,9 @@ class TodoCubit extends Cubit<List<TodoState>> {
           )
           .toList(),
     );
+
+    // Toggle in firestore
+    _repository.toggleCompleted(id);
   }
 
   void remove(String id) {
@@ -51,5 +62,7 @@ class TodoCubit extends Cubit<List<TodoState>> {
           .toList()
         ..removeWhere((todo) => todo.id == id),
     );
+
+    _repository.removeTodo(id);
   }
 }

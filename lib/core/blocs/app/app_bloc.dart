@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:bloc_vgv_todoapp/core/api/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/core/models/user_model.dart';
+import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'app_event.dart';
