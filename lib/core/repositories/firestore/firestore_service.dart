@@ -1,4 +1,4 @@
-import 'package:bloc_vgv_todoapp/features/todo/cubit/todo_cubit.dart';
+import 'package:bloc_vgv_todoapp/core/models/todo_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tuple/tuple.dart';
@@ -15,7 +15,7 @@ class FirestoreService {
     return Tuple2(doc, docRef);
   }
 
-  Future<void> addTodoData(TodoState todo) async {
+  Future<void> addTodoData(Todo todo) async {
     final docTuple = await getDocument();
 
     if (docTuple.item1.exists) {
@@ -46,7 +46,7 @@ class FirestoreService {
 
     if (docTuple.item1.exists) {
       final todos = (docTuple.item1.data()!['todos'] as List<dynamic>)
-          .map((e) => TodoState.fromMap(e as Map<String, dynamic>))
+          .map((e) => Todo.fromMap(e as Map<String, dynamic>))
           .toList();
 
       final todo = todos.firstWhere((todo) => todo.id == id);
@@ -64,13 +64,13 @@ class FirestoreService {
     }
   }
 
-  Future<List<TodoState>> retrieveTodos() async {
+  Future<List<Todo>> retrieveTodos() async {
     final docTuple = await getDocument();
 
     if (docTuple.item1.exists) {
       final todos = docTuple.item1.data()!['todos'] as List<dynamic>;
       return todos
-          .map((todo) => TodoState.fromMap(todo as Map<String, dynamic>))
+          .map((todo) => Todo.fromMap(todo as Map<String, dynamic>))
           .toList();
     } else {
       return [];
@@ -82,7 +82,7 @@ class FirestoreService {
 
     if (docTuple.item1.exists) {
       final todos = (docTuple.item1.data()!['todos'] as List<dynamic>)
-          .map((e) => TodoState.fromMap(e as Map<String, dynamic>))
+          .map((e) => Todo.fromMap(e as Map<String, dynamic>))
           .toList();
 
       final index = todos.indexWhere((todo) => todo.id == id);

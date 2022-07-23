@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_vgv_todoapp/core/models/todo_model.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'todo_state.dart';
 
-class TodoCubit extends Cubit<List<TodoState>> {
+class TodoCubit extends Cubit<List<Todo>> {
   TodoCubit() : super([]) {
     _repository.retrieveTodos().then(emit);
   }
@@ -24,12 +25,12 @@ class TodoCubit extends Cubit<List<TodoState>> {
           )
           .toList()
         ..add(
-          TodoState(id: id, title: title),
+          Todo(id: id, title: title),
         ),
     );
 
     // Add to firestore
-    _repository.addTodoData(TodoState(id: id, title: title));
+    _repository.addTodoData(Todo(id: id, title: title));
   }
 
   void toggle(String id) {

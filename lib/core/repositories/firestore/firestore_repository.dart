@@ -1,10 +1,10 @@
+import 'package:bloc_vgv_todoapp/core/models/todo_model.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_service.dart';
-import 'package:bloc_vgv_todoapp/features/todo/cubit/todo_cubit.dart';
 
 abstract class DatabaseRepository {
-  Future<void> addTodoData(TodoState todo);
+  Future<void> addTodoData(Todo todo);
   Future<void> toggleCompleted(String id);
-  Future<List<TodoState>> retrieveTodos();
+  Future<List<Todo>> retrieveTodos();
   Future<void> removeTodo(String id);
 }
 
@@ -12,7 +12,7 @@ class FirestoreRepositoryImpl implements DatabaseRepository {
   FirestoreService service = FirestoreService();
 
   @override
-  Future<void> addTodoData(TodoState todo) {
+  Future<void> addTodoData(Todo todo) {
     return service.addTodoData(todo);
   }
 
@@ -22,7 +22,7 @@ class FirestoreRepositoryImpl implements DatabaseRepository {
   }
 
   @override
-  Future<List<TodoState>> retrieveTodos() {
+  Future<List<Todo>> retrieveTodos() {
     return service.retrieveTodos();
   }
 

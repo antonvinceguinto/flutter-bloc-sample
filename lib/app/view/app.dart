@@ -1,7 +1,6 @@
-import 'package:bloc_vgv_todoapp/core/blocs/firestore/firestore_bloc.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
+import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +17,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => FirestoreBloc(),
-        )
-      ],
-      child: RepositoryProvider.value(
-        value: _authRepository,
-        child: BlocProvider(
-          create: (_) => AppBloc(authRepository: _authRepository),
-          child: const AppView(),
-        ),
+    return RepositoryProvider.value(
+      value: _authRepository,
+      child: BlocProvider(
+        create: (_) => AppBloc(authRepository: _authRepository),
+        child: const AppView(),
       ),
     );
   }
