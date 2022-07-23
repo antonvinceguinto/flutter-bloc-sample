@@ -3,6 +3,7 @@ import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_service.d
 
 abstract class DatabaseRepository {
   Future<void> addTodoData(Todo todo);
+  Future<void> updateTodoData(Todo todo, String newTitle);
   Future<void> toggleCompleted(String id);
   Future<List<Todo>> retrieveTodos();
   Future<void> removeTodo(String id);
@@ -14,6 +15,11 @@ class FirestoreRepositoryImpl implements DatabaseRepository {
   @override
   Future<void> addTodoData(Todo todo) {
     return service.addTodoData(todo);
+  }
+
+  @override
+  Future<void> updateTodoData(Todo todo, String newTitle) {
+    return service.updateTodoData(todo, newTitle);
   }
 
   @override

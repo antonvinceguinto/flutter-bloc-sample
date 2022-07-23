@@ -29,8 +29,28 @@ class TodoCubit extends Cubit<List<Todo>> {
         ),
     );
 
-    // Add to firestore
     _repository.addTodoData(Todo(id: id, title: title));
+  }
+
+  void updateTodo(String id, String title) {
+    emit(
+      state
+          .map(
+            (todo) => todo.copyWith(
+              id: todo.id!,
+              title: todo.title!,
+              completed: todo.completed,
+            ),
+          )
+          .toList()
+        ..removeWhere((todo) => todo.id == id)
+        ..add(
+          Todo(id: id, title: title),
+        ),
+    );
+
+    // Update to firestore
+    _repository.updateTodoData(Todo(id: id, title: title), title);
   }
 
   void toggle(String id) {

@@ -15,6 +15,29 @@ class FirestoreService {
     return Tuple2(doc, docRef);
   }
 
+  Future<void> updateTodoData(Todo _todo, String title) async {
+    final docTuple = await getDocument();
+
+    if (docTuple.item1.exists) {
+      final todos = (docTuple.item1.data()!['todos'] as List<dynamic>)
+          .map((e) => Todo.fromMap(e as Map<String, dynamic>))
+          .toList();
+
+      final todo = todos.firstWhere((todo) => todo.id == _todo.id);
+      final index = todos.indexWhere((todo) => todo.id == _todo.id);
+
+      todos[index] = todo.copyWith(
+        id: todo.id!,
+        title: title,
+        completed: todo.completed,
+      );
+
+      await docTuple.item2.update({
+        'todos': todos.map((todo) => todo.toMap()).toList(),
+      });
+    }
+  }
+
   Future<void> addTodoData(Todo todo) async {
     final docTuple = await getDocument();
 
