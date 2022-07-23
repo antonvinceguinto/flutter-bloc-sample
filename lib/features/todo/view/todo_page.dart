@@ -62,7 +62,12 @@ class _TodoViewState extends State<TodoView> {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(user.avatar!),
+              radius: 18,
+              child: ClipOval(
+                child: Image.network(
+                  user.avatar!,
+                ),
+              ),
             ),
           ),
         ],
