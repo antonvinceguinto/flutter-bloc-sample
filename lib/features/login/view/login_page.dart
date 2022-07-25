@@ -35,9 +35,13 @@ class LoginView extends StatelessWidget {
             );
           }
           return Center(
-            child: ElevatedButton(
-              child: const Text('Login via Gmail'),
-              onPressed: () => context.read<LoginCubit>().loginWithGmail(),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  child: const Text('Login via Gmail'),
+                  onPressed: () => context.read<LoginCubit>().loginWithGmail(),
+                ),
+              ],
             ),
           );
         },

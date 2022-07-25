@@ -1,10 +1,8 @@
-import 'package:bloc_vgv_todoapp/features/todo/cubit/todo_cubit.dart';
-
-class Todo extends TodoState {
+class Todo {
   const Todo({
-    required String super.id,
-    required String super.title,
-    super.completed,
+    this.id,
+    this.title,
+    this.completed = false,
   });
 
   factory Todo.fromMap(Map<String, dynamic> map) {
@@ -14,6 +12,10 @@ class Todo extends TodoState {
       completed: map['completed'] as bool,
     );
   }
+
+  final String? id;
+  final String? title;
+  final bool completed;
 
   Todo copyWith({
     required String id,

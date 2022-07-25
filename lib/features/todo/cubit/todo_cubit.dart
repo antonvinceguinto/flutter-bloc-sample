@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_vgv_todoapp/core/models/todo_model.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
-import 'package:equatable/equatable.dart';
-
-part 'todo_state.dart';
+// part '../bloc/todo_state.dart';
 
 class TodoCubit extends Cubit<List<Todo>> {
   TodoCubit() : super([]) {
