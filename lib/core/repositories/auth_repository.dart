@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:bloc_vgv_todoapp/core/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
@@ -28,10 +26,11 @@ class AuthRepository {
 
   Future<void> signup({required String email, required String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      final _user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await _user.user?.sendEmailVerification();
     } catch (err) {
       if (err is firebase_auth.FirebaseAuthException) {
         throw Exception(err.message);
@@ -53,7 +52,7 @@ class AuthRepository {
       if (err is firebase_auth.FirebaseAuthException) {
         throw Exception(err.message);
       }
-      throw Exception('Something went wrong');
+      throw Exception(err.toString());
     }
   }
 
@@ -95,7 +94,7 @@ class AuthRepository {
       if (err is firebase_auth.FirebaseAuthException) {
         throw Exception(err.message);
       }
-      throw Exception('Something went wrong');
+      throw Exception(err.toString());
     }
   }
 }
@@ -106,5 +105,6 @@ extension on firebase_auth.User {
         email: email,
         name: displayName,
         avatar: photoURL,
+        emailVerified: emailVerified,
       );
 }

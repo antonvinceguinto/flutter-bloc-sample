@@ -1,5 +1,5 @@
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
-import 'package:bloc_vgv_todoapp/features/auth/login/login_page.dart';
+import 'package:bloc_vgv_todoapp/features/auth/auth_screens.dart';
 import 'package:bloc_vgv_todoapp/features/todo/view/todo_page.dart';
 import 'package:flutter/material.dart';
 
