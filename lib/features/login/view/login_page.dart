@@ -59,121 +59,126 @@ class LoginView extends StatelessWidget {
             vertical: 8,
           ),
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  width: 120,
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Sw8 Signals',
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 60),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'Login',
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                          fontSize: 40,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/logo.png',
+                    width: 120,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Sw8 Signals',
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                   ),
-                ),
-                const SizedBox(height: 22),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _blocBuilderWrapper(
-                        child: SizedBox(
-                          height: 50,
-                          child: TextFormField(
-                            decoration: _inputDecoration(
-                              labelText: 'Email',
-                              icon: Icons.alternate_email,
-                            ),
-                            onChanged: (value) =>
-                                context.read<LoginCubit>().emailChanged(value),
-                            validator: (value) =>
-                                value!.isEmpty ? "Email can't be empty" : null,
+                  const SizedBox(height: 60),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Login',
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      _blocBuilderWrapper(
-                        child: SizedBox(
-                          height: 50,
-                          child: TextFormField(
-                            decoration: _inputDecoration(
-                              labelText: 'Password',
-                              icon: Icons.lock,
-                            ),
-                            onChanged: (value) => context
-                                .read<LoginCubit>()
-                                .passwordChanged(value),
-                            validator: (value) => value!.isEmpty
-                                ? "Password can't be empty"
-                                : null,
-                            obscureText: true,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            child: const Text('Forgot Password'),
-                            onPressed: () async {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      BlocBuilder<LoginCubit, LoginState>(
-                        buildWhen: (previous, current) =>
-                            previous.status != current.status,
-                        builder: (context, state) {
-                          return state.status == LoginStatus.submitting
-                              ? const CircularProgressIndicator()
-                              : SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    child: const Text('Login'),
-                                    onPressed: () async {
-                                      if (!_formKey.currentState!.validate()) {
-                                        return;
-                                      }
-                                      await context
-                                          .read<LoginCubit>()
-                                          .loginWithCredential();
-                                    },
-                                  ),
-                                );
-                        },
-                      ),
-                      const SizedBox(height: 8),
-                      TextButton(
-                        child: const Text('Create Signal Account'),
-                        onPressed: () async {
-                          await AutoRouter.of(context)
-                              .push(const SignupRoute());
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 22),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _blocBuilderWrapper(
+                          child: SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              decoration: _inputDecoration(
+                                labelText: 'Email',
+                                icon: Icons.alternate_email,
+                              ),
+                              onChanged: (value) => context
+                                  .read<LoginCubit>()
+                                  .emailChanged(value),
+                              validator: (value) => value!.isEmpty
+                                  ? "Email can't be empty"
+                                  : null,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        _blocBuilderWrapper(
+                          child: SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              decoration: _inputDecoration(
+                                labelText: 'Password',
+                                icon: Icons.lock,
+                              ),
+                              onChanged: (value) => context
+                                  .read<LoginCubit>()
+                                  .passwordChanged(value),
+                              validator: (value) => value!.isEmpty
+                                  ? "Password can't be empty"
+                                  : null,
+                              obscureText: true,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              child: const Text('Forgot Password'),
+                              onPressed: () async {
+                                if (!_formKey.currentState!.validate()) {
+                                  return;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        BlocBuilder<LoginCubit, LoginState>(
+                          buildWhen: (previous, current) =>
+                              previous.status != current.status,
+                          builder: (context, state) {
+                            return state.status == LoginStatus.submitting
+                                ? const CircularProgressIndicator()
+                                : SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      child: const Text('Login'),
+                                      onPressed: () async {
+                                        if (!_formKey.currentState!
+                                            .validate()) {
+                                          return;
+                                        }
+                                        await context
+                                            .read<LoginCubit>()
+                                            .loginWithCredential();
+                                      },
+                                    ),
+                                  );
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        TextButton(
+                          child: const Text('Create Signal Account'),
+                          onPressed: () async {
+                            await AutoRouter.of(context)
+                                .push(const SignupRoute());
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

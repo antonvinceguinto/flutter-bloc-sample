@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/features/login/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,17 +26,16 @@ class SignupView extends StatelessWidget {
     return Scaffold(
       body: BlocListener<LoginCubit, LoginState>(
         listener: (BuildContext context, state) {
-          // Listen for states here
-          if (state.status == LoginStatus.error) {
-            late BuildContext dialogContext;
+          late BuildContext dialogContext;
 
+          if (state.status == LoginStatus.error) {
             showDialog<void>(
               context: context,
               builder: (context) {
                 dialogContext = context;
                 return AlertDialog(
                   title: const Text('Error'),
-                  content: const Text('Please check your email and password'),
+                  content: const Text('Something went wrong'),
                   actions: [
                     TextButton(
                       child: const Text('OK'),
@@ -48,6 +48,12 @@ class SignupView extends StatelessWidget {
               },
             );
           }
+
+          if (state.status == LoginStatus.success) {
+            Future.delayed(const Duration(milliseconds: 500), () async {
+              await AutoRouter.of(context).pop();
+            });
+          }
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -58,18 +64,6 @@ class SignupView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  width: 120,
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Sw8 Signals',
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 60),
                 SizedBox(
                   width: double.infinity,
                   child: Text(
@@ -97,8 +91,9 @@ class SignupView extends StatelessWidget {
                             ),
                             onChanged: (value) =>
                                 context.read<LoginCubit>().emailChanged(value),
-                            validator: (value) =>
-                                value!.isEmpty ? "Email can't be empty" : null,
+                            validator: (value) => value!.trim().isEmpty
+                                ? "Email can't be empty"
+                                : null,
                           ),
                         ),
                       ),
@@ -114,28 +109,16 @@ class SignupView extends StatelessWidget {
                             onChanged: (value) => context
                                 .read<LoginCubit>()
                                 .passwordChanged(value),
-                            validator: (value) => value!.isEmpty
+                            validator: (value) => value!.trim().isEmpty
                                 ? "Password can't be empty"
-                                : null,
+                                : value.length < 6
+                                    ? 'Minimum of 6 characters'
+                                    : null,
                             obscureText: true,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            child: const Text('Forgot Password'),
-                            onPressed: () async {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 32),
                       BlocBuilder<LoginCubit, LoginState>(
                         buildWhen: (previous, current) =>
                             previous.status != current.status,
@@ -145,14 +128,14 @@ class SignupView extends StatelessWidget {
                               : SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
-                                    child: const Text('Login'),
+                                    child: const Text('Submit'),
                                     onPressed: () async {
                                       if (!_formKey.currentState!.validate()) {
                                         return;
                                       }
                                       await context
                                           .read<LoginCubit>()
-                                          .loginWithCredential();
+                                          .signupWithCredential();
                                     },
                                   ),
                                 );
@@ -160,8 +143,10 @@ class SignupView extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       TextButton(
-                        child: const Text('Create Signal Account'),
-                        onPressed: () async {},
+                        child: const Text('Go Back'),
+                        onPressed: () async {
+                          await AutoRouter.of(context).pop();
+                        },
                       ),
                     ],
                   ),

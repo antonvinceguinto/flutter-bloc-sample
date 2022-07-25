@@ -59,17 +59,17 @@ class _TodoViewState extends State<TodoView> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 18,
-              child: ClipOval(
-                child: Image.network(
-                  user.avatar!,
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 16),
+          //   child: CircleAvatar(
+          //     radius: 18,
+          //     child: ClipOval(
+          //       child: Image.network(
+          //         user.avatar ?? '',
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
