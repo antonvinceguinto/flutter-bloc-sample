@@ -65,12 +65,18 @@ class _AppViewState extends State<AppView> {
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF0164FF),
         ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: const Color(0xFF0164FF),
+          ),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            elevation: 0,
             primary: const Color(0xFF0164FF),
             padding: const EdgeInsets.all(18),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(14),
             ),
           ),
         ),

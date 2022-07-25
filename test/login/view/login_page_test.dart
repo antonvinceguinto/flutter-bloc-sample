@@ -1,10 +1,6 @@
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/features/counter/counter.dart';
-import 'package:bloc_vgv_todoapp/features/login/view/login_page.dart';
+import 'package:bloc_vgv_todoapp/features/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_sign_in_mocks/google_sign_in_mocks.dart';
 
 import '../../helpers/helpers.dart';
 

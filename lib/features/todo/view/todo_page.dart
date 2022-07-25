@@ -38,13 +38,12 @@ class _TodoViewState extends State<TodoView> {
   @override
   Widget build(BuildContext context) {
     final todosState = context.select((TodoCubit cubit) => cubit.state);
-    final user = context.select((AppBloc bloc) => bloc.state.user);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Todo',
+          'Signal Feed',
           style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
                 color: Colors.black,
               ),
@@ -58,18 +57,14 @@ class _TodoViewState extends State<TodoView> {
             color: Colors.red,
           ),
         ),
-        actions: [
-          // Padding(
-          //   padding: const EdgeInsets.only(right: 16),
-          //   child: CircleAvatar(
-          //     radius: 18,
-          //     child: ClipOval(
-          //       child: Image.network(
-          //         user.avatar ?? '',
-          //       ),
-          //     ),
-          //   ),
-          // ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: CircleAvatar(
+              radius: 18,
+              child: Icon(Icons.person),
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

@@ -37,7 +37,12 @@ class LoginCubit extends Cubit<LoginState> {
       );
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
-      emit(state.copyWith(status: LoginStatus.error));
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+          error: e.toString(),
+        ),
+      );
     }
   }
 
@@ -51,7 +56,12 @@ class LoginCubit extends Cubit<LoginState> {
       );
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
-      emit(state.copyWith(status: LoginStatus.error));
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+          error: e.toString(),
+        ),
+      );
     }
   }
 
@@ -62,7 +72,28 @@ class LoginCubit extends Cubit<LoginState> {
       await _authRepository.loginViaGmail();
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
-      emit(state.copyWith(status: LoginStatus.error));
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+          error: e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> forgotPassword() async {
+    if (state.status == LoginStatus.submitting) return;
+    emit(state.copyWith(status: LoginStatus.submitting));
+    try {
+      await _authRepository.forgotPassword(state.email);
+      emit(state.copyWith(status: LoginStatus.success));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: LoginStatus.error,
+          error: e.toString(),
+        ),
+      );
     }
   }
 

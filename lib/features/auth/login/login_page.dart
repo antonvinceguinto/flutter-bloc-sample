@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/features/login/cubit/login_cubit.dart';
+import 'package:bloc_vgv_todoapp/features/auth/cubit/login_cubit.dart';
+import 'package:bloc_vgv_todoapp/features/auth/widgets/bloc_wrapper.dart';
 import 'package:bloc_vgv_todoapp/sw_routes.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +39,7 @@ class LoginView extends StatelessWidget {
                 dialogContext = context;
                 return AlertDialog(
                   title: const Text('Error'),
-                  content: const Text('Please check your email and password'),
+                  content: Text(state.error),
                   actions: [
                     TextButton(
                       child: const Text('OK'),
@@ -69,7 +69,7 @@ class LoginView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Sw8 Signals',
+                    'SW8 Signals',
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -92,11 +92,11 @@ class LoginView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _blocBuilderWrapper(
+                        BlocLoginWrapper(
                           child: SizedBox(
                             height: 50,
                             child: TextFormField(
-                              decoration: _inputDecoration(
+                              decoration: customInputDecoration(
                                 labelText: 'Email',
                                 icon: Icons.alternate_email,
                               ),
@@ -110,11 +110,11 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        _blocBuilderWrapper(
+                        BlocLoginWrapper(
                           child: SizedBox(
                             height: 50,
                             child: TextFormField(
-                              decoration: _inputDecoration(
+                              decoration: customInputDecoration(
                                 labelText: 'Password',
                                 icon: Icons.lock,
                               ),
@@ -133,11 +133,10 @@ class LoginView extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
-                              child: const Text('Forgot Password'),
+                              child: const Text('Forgot Password?'),
                               onPressed: () async {
-                                if (!_formKey.currentState!.validate()) {
-                                  return;
-                                }
+                                await AutoRouter.of(context)
+                                    .push(const ForgotPasswordRoute());
                               },
                             ),
                           ),
@@ -185,39 +184,4 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _blocBuilderWrapper({required Widget child}) {
-  return BlocBuilder<LoginCubit, LoginState>(
-    buildWhen: (previous, current) => previous.status != current.status,
-    builder: (context, state) {
-      return child;
-    },
-  );
-}
-
-InputDecoration _inputDecoration({
-  required String labelText,
-  required IconData icon,
-}) {
-  return InputDecoration(
-    hintText: labelText,
-    // fillColor: Colors.grey[100],
-    // filled: true,
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 8,
-    ),
-    icon: Icon(
-      icon,
-      color: Colors.blueGrey.shade400,
-    ),
-    border: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: BorderSide(
-        width: 3,
-        color: Colors.blueGrey.shade400,
-      ),
-    ),
-  );
 }

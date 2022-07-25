@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:bloc_vgv_todoapp/core/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
@@ -31,8 +32,11 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (_) {
-      throw Exception('Error: Signup failed');
+    } catch (err) {
+      if (err is firebase_auth.FirebaseAuthException) {
+        throw Exception(err.message);
+      }
+      throw Exception('Something went wrong');
     }
   }
 
@@ -45,8 +49,11 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (_) {
-      throw Exception('Error: Login failed');
+    } catch (err) {
+      if (err is firebase_auth.FirebaseAuthException) {
+        throw Exception(err.message);
+      }
+      throw Exception('Something went wrong');
     }
   }
 
@@ -62,15 +69,34 @@ class AuthRepository {
       );
 
       await _firebaseAuth.signInWithCredential(credential);
-    } catch (e) {
-      debugPrint('Error login via gmail: $e');
+    } catch (err) {
+      if (err is firebase_auth.FirebaseAuthException) {
+        throw Exception(err.message);
+      }
+      throw Exception('Something went wrong');
+    }
+  }
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } catch (err) {
+      if (err is firebase_auth.FirebaseAuthException) {
+        throw Exception(err.message);
+      }
+      throw Exception('Something went wrong');
     }
   }
 
   Future<void> logOut() async {
     try {
       await _firebaseAuth.signOut();
-    } catch (_) {}
+    } catch (err) {
+      if (err is firebase_auth.FirebaseAuthException) {
+        throw Exception(err.message);
+      }
+      throw Exception('Something went wrong');
+    }
   }
 }
 

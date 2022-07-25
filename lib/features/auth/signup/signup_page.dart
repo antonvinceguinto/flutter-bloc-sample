@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/features/login/cubit/login_cubit.dart';
+import 'package:bloc_vgv_todoapp/features/auth/cubit/login_cubit.dart';
+import 'package:bloc_vgv_todoapp/features/auth/widgets/bloc_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +36,7 @@ class SignupView extends StatelessWidget {
                 dialogContext = context;
                 return AlertDialog(
                   title: const Text('Error'),
-                  content: const Text('Something went wrong'),
+                  content: Text(state.error),
                   actions: [
                     TextButton(
                       child: const Text('OK'),
@@ -81,11 +82,11 @@ class SignupView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _blocBuilderWrapper(
+                      BlocLoginWrapper(
                         child: SizedBox(
                           height: 50,
                           child: TextFormField(
-                            decoration: _inputDecoration(
+                            decoration: customInputDecoration(
                               labelText: 'Email',
                               icon: Icons.alternate_email,
                             ),
@@ -98,11 +99,11 @@ class SignupView extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      _blocBuilderWrapper(
+                      BlocLoginWrapper(
                         child: SizedBox(
                           height: 50,
                           child: TextFormField(
-                            decoration: _inputDecoration(
+                            decoration: customInputDecoration(
                               labelText: 'Password',
                               icon: Icons.lock,
                             ),
@@ -158,39 +159,4 @@ class SignupView extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _blocBuilderWrapper({required Widget child}) {
-  return BlocBuilder<LoginCubit, LoginState>(
-    buildWhen: (previous, current) => previous.status != current.status,
-    builder: (context, state) {
-      return child;
-    },
-  );
-}
-
-InputDecoration _inputDecoration({
-  required String labelText,
-  required IconData icon,
-}) {
-  return InputDecoration(
-    hintText: labelText,
-    // fillColor: Colors.grey[100],
-    // filled: true,
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 8,
-    ),
-    icon: Icon(
-      icon,
-      color: Colors.blueGrey.shade400,
-    ),
-    border: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: BorderSide(
-        width: 3,
-        color: Colors.blueGrey.shade400,
-      ),
-    ),
-  );
 }
