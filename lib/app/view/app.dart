@@ -2,10 +2,12 @@ import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
+import 'package:bloc_vgv_todoapp/sw_routes.gr.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -27,22 +29,50 @@ class App extends StatelessWidget {
   }
 }
 
-class AppView extends StatelessWidget {
+class AppView extends StatefulWidget {
   const AppView({super.key});
 
   @override
+  State<AppView> createState() => _AppViewState();
+}
+
+class _AppViewState extends State<AppView> {
+  late SWRouter router;
+
+  @override
+  void initState() {
+    router = SWRouter();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(
+        textTheme: GoogleFonts.montserratTextTheme().copyWith(
+          headline1: GoogleFonts.montserrat(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         appBarTheme: const AppBarTheme(
-          color: Color(0xFF13B9FF),
+          color: Color(0xFF0164FF),
           titleTextStyle: TextStyle(
             color: Colors.white,
             fontSize: 20,
           ),
         ),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color(0xFF0164FF),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xFF0164FF),
+            padding: const EdgeInsets.all(18),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
         ),
       ),
       localizationsDelegates: const [
@@ -50,10 +80,20 @@ class AppView extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: FlowBuilder(
-        state: context.select((AppBloc bloc) => bloc.state.status),
-        onGeneratePages: onGenerateAppViewPages,
-      ),
+      routeInformationParser: router.defaultRouteParser(),
+      routerDelegate: router.delegate(),
+    );
+  }
+}
+
+class AppInitView extends StatelessWidget {
+  const AppInitView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FlowBuilder(
+      state: context.select((AppBloc bloc) => bloc.state.status),
+      onGeneratePages: onGenerateAppViewPages,
     );
   }
 }

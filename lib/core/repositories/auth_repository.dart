@@ -12,7 +12,6 @@ class AuthRepository {
   final _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
 
@@ -32,7 +31,9 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (_) {}
+    } catch (_) {
+      throw Exception('Error: Signup failed');
+    }
   }
 
   Future<void> loginWithEmailAndPassword({
@@ -44,7 +45,9 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } catch (_) {}
+    } catch (_) {
+      throw Exception('Error: Login failed');
+    }
   }
 
   Future<void> loginViaGmail() async {

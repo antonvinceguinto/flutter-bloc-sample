@@ -1,27 +1,22 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/features/login/cubit/login_cubit.dart';
-import 'package:bloc_vgv_todoapp/sw_routes.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
-  static Page<dynamic> page() => const MaterialPage(child: LoginPage());
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => LoginCubit(context.read<AuthRepository>()),
-      child: LoginView(),
+      child: SignupView(),
     );
   }
 }
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class SignupView extends StatelessWidget {
+  SignupView({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
@@ -30,6 +25,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: BlocListener<LoginCubit, LoginState>(
         listener: (BuildContext context, state) {
+          // Listen for states here
           if (state.status == LoginStatus.error) {
             late BuildContext dialogContext;
 
@@ -77,7 +73,7 @@ class LoginView extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
-                    'Login',
+                    'Signup',
                     style: Theme.of(context).textTheme.headline1!.copyWith(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
@@ -165,10 +161,7 @@ class LoginView extends StatelessWidget {
                       const SizedBox(height: 8),
                       TextButton(
                         child: const Text('Create Signal Account'),
-                        onPressed: () async {
-                          await AutoRouter.of(context)
-                              .push(const SignupRoute());
-                        },
+                        onPressed: () async {},
                       ),
                     ],
                   ),

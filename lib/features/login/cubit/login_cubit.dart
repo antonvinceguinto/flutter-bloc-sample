@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  void passwordChaned(String value) {
+  void passwordChanged(String value) {
     emit(
       state.copyWith(
         password: value,
