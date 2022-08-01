@@ -1,38 +1,48 @@
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
+import 'package:bloc_vgv_todoapp/core/models/signal_model.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/features/todo/cubit/todo_cubit.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
+import 'package:bloc_vgv_todoapp/features/signals/cubit/signals_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TodoPage extends StatelessWidget {
-  const TodoPage({super.key});
+class SignalsPage extends StatelessWidget {
+  SignalsPage({super.key});
 
-  static Page<dynamic> page() => const MaterialPage(child: TodoPage());
+  static Page<dynamic> page() => MaterialPage(child: SignalsPage());
+
+  final _firestoreRepository = FirestoreRepositoryImpl();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => TodoCubit(),
-      child: const TodoView(),
+    return RepositoryProvider.value(
+      value: _firestoreRepository,
+      child: BlocProvider<SignalsCubit>(
+        create: (_) => SignalsCubit(
+          firestoreRepositoryImpl: _firestoreRepository,
+        ),
+        child: const SignalsView(),
+      ),
     );
   }
 }
 
-class TodoView extends StatefulWidget {
-  const TodoView({super.key});
+class SignalsView extends StatefulWidget {
+  const SignalsView({super.key});
 
   @override
-  State<TodoView> createState() => _TodoViewState();
+  State<SignalsView> createState() => _SignalsViewState();
 }
 
-class _TodoViewState extends State<TodoView> {
+class _SignalsViewState extends State<SignalsView> {
   static const verificationStatusHeight = 38.0;
 
   @override
   Widget build(BuildContext context) {
     final _isEmailVerified =
         context.read<AuthRepository>().currentUser.emailVerified ?? false;
+
+    final signals = context.select((SignalsCubit cubit) => cubit.state);
 
     return Scaffold(
       appBar: AppBar(
@@ -89,7 +99,15 @@ class _TodoViewState extends State<TodoView> {
         },
         child: SingleChildScrollView(
           child: Column(
-            children: [],
+            children: [
+              ...signals
+                  .map(
+                    (e) => ListTile(
+                      title: Text(e.title),
+                    ),
+                  )
+                  .toList(),
+            ],
           ),
         ),
       ),

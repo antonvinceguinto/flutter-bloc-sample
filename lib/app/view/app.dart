@@ -1,8 +1,8 @@
+import 'package:bloc_vgv_todoapp/app/app_router.gr.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
-import 'package:bloc_vgv_todoapp/sw_routes.gr.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,11 +37,11 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  late SWRouter router;
+  late AppRouter router;
 
   @override
   void initState() {
-    router = SWRouter();
+    router = AppRouter();
 
     super.initState();
   }

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 part 'login_state.dart';
 

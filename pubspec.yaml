@@ -8,7 +8,7 @@ environment:
   flutter: 3.0.4
 
 dependencies:
-  auto_route:
+  auto_route: ^4.2.1
   bloc:
   cloud_firestore:
   equatable:
@@ -28,7 +28,7 @@ dependencies:
   tuple:
 
 dev_dependencies:
-  auto_route_generator:
+  auto_route_generator: ^4.2.0
   bloc_test:
   build_runner:
   flutter_test:

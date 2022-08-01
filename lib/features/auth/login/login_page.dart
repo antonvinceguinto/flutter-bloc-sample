@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bloc_vgv_todoapp/app/app_router.gr.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/features/auth/cubit/login_cubit.dart';
 import 'package:bloc_vgv_todoapp/features/auth/widgets/bloc_wrapper.dart';
-import 'package:bloc_vgv_todoapp/sw_routes.gr.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

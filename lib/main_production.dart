@@ -13,6 +13,7 @@ void main() async {
   );
 
   final authRepository = AuthRepository();
+  await authRepository.user.first;
 
   await bootstrap(() => App(authRepository: authRepository));
 }
