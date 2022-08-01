@@ -2,7 +2,7 @@ import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/models/signal_model.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
-import 'package:bloc_vgv_todoapp/features/signals/cubit/signals_cubit.dart';
+import 'package:bloc_vgv_todoapp/features/signals/bloc/signals_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,10 +17,9 @@ class SignalsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: _firestoreRepository,
-      child: BlocProvider<SignalsCubit>(
-        create: (_) => SignalsCubit(
-          firestoreRepositoryImpl: _firestoreRepository,
-        ),
+      child: BlocProvider<SignalsBloc>(
+        create: (_) =>
+            SignalsBloc(_firestoreRepository)..add(const SignalsEvent()),
         child: const SignalsView(),
       ),
     );
@@ -41,8 +40,6 @@ class _SignalsViewState extends State<SignalsView> {
   Widget build(BuildContext context) {
     final _isEmailVerified =
         context.read<AuthRepository>().currentUser.emailVerified ?? false;
-
-    final signals = context.select((SignalsCubit cubit) => cubit.state);
 
     return Scaffold(
       appBar: AppBar(
@@ -93,23 +90,30 @@ class _SignalsViewState extends State<SignalsView> {
           ),
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: () {
-          return Future.value();
+      body: BlocBuilder<SignalsBloc, SignalsState>(
+        buildWhen: (previous, current) => previous != current,
+        builder: (context, SignalsState state) {
+          if (state is SignalsLoaded) {
+            return RefreshIndicator(
+              onRefresh: () {
+                BlocProvider.of<SignalsBloc>(context).add(const SignalsEvent());
+                return Future.value();
+              },
+              child: ListView.builder(
+                itemCount: state.signals.length,
+                itemBuilder: (context, index) {
+                  final signal = state.signals[index];
+                  return ListTile(
+                    title: Text(signal.title),
+                  );
+                },
+              ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ...signals
-                  .map(
-                    (e) => ListTile(
-                      title: Text(e.title),
-                    ),
-                  )
-                  .toList(),
-            ],
-          ),
-        ),
       ),
     );
   }

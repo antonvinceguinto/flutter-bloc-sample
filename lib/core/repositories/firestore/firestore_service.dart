@@ -23,8 +23,8 @@ class FirestoreService {
     }
   }
 
-  Future<List<Signal>> retrieveSignals() async {
-    final docRef = _db.collection('signals');
+  Stream<List<Signal>> retrieveSignals() {
+    // final docRef = _db.collection('signals');
     // return docRef.snapshots().map((snapshot) {
     //   return snapshot.docs.map((doc) {
     //     return Signal.fromMap(doc.data());
@@ -32,21 +32,21 @@ class FirestoreService {
     // });
 
     // Return list of signals via stream
-    // return _db.collection('signals').snapshots().map((snapshot) {
-    //   return snapshot.docs.map((doc) {
-    //     return Signal.fromMap(doc.data());
-    //   }).toList();
-    // });
+    return _db.collection('signals').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Signal.fromMap(doc.data());
+      }).toList();
+    });
 
-    print('asdasd');
+    // print('asdasd');
 
-    final doc = await docRef.get();
-    final signals = <Signal>[];
-    for (final doc in doc.docs) {
-      final signal = Signal.fromMap(doc.data());
-      signals.add(signal);
-    }
-    return signals;
+    // final doc = await docRef.get();
+    // final signals = <Signal>[];
+    // for (final doc in doc.docs) {
+    //   final signal = Signal.fromMap(doc.data());
+    //   signals.add(signal);
+    // }
+    // return signals;
   }
 
   // Future<void> removeSignal(String id) async {

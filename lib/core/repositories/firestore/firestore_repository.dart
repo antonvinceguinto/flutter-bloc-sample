@@ -4,7 +4,7 @@ import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_service.d
 abstract class DatabaseRepository {
   Future<void> addSignalData(Signal todo);
   // Future<void> setExpired(String id);
-  Future<List<Signal>> retrieveSignals();
+  Stream<List<Signal>> retrieveSignals();
   // Future<void> removeSignal(String id);
 }
 
@@ -22,9 +22,7 @@ class FirestoreRepositoryImpl implements DatabaseRepository {
   // }
 
   @override
-  Future<List<Signal>> retrieveSignals() async {
-    return service.retrieveSignals();
-  }
+  Stream<List<Signal>> retrieveSignals() => service.retrieveSignals();
 
   // @override
   // Future<void> removeSignal(String id) {
