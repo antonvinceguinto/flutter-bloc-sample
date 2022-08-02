@@ -50,14 +50,14 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
-        textTheme: GoogleFonts.montserratTextTheme().copyWith(
-          headline1: GoogleFonts.montserrat(
+        textTheme: GoogleFonts.kanitTextTheme().copyWith(
+          headline1: GoogleFonts.kanit(
             fontWeight: FontWeight.bold,
           ),
         ),
-        appBarTheme: const AppBarTheme(
-          color: Color(0xFF0164FF),
-          titleTextStyle: TextStyle(
+        appBarTheme: AppBarTheme(
+          color: const Color(0xFF0164FF),
+          titleTextStyle: GoogleFonts.kanit(
             color: Colors.white,
             fontSize: 20,
           ),
