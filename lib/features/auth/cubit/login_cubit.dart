@@ -1,5 +1,5 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'login_state.dart';
@@ -7,7 +7,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._authRepository) : super(LoginState.initial());
 
-  final AuthRepository _authRepository;
+  final AuthenticationRepository _authRepository;
 
   void emailChanged(String value) {
     emit(
@@ -69,7 +69,7 @@ class LoginCubit extends Cubit<LoginState> {
     if (state.status == LoginStatus.submitting) return;
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
-      await _authRepository.loginViaGmail();
+      await _authRepository.logInWithGoogle();
       emit(state.copyWith(status: LoginStatus.success));
     } catch (e) {
       emit(

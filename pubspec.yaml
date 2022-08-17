@@ -8,12 +8,12 @@ environment:
   flutter: 3.0.4
 
 dependencies:
-  auto_route: ^4.2.1
-  bloc:
-  cloud_firestore:
+  authentication_repository:
+    path: packages/authentication_repository
+  auto_route:
   equatable:
-  firebase_auth:
-  firebase_core:
+  firestore_repository:
+    path: packages/firestore_repository
   flow_builder:
   flutter:
     sdk: flutter
@@ -22,13 +22,12 @@ dependencies:
     sdk: flutter
   flutterfire_ui:
   google_fonts:
-  google_sign_in:
   google_sign_in_mocks:
   intl:
   tuple:
 
 dev_dependencies:
-  auto_route_generator: ^4.2.0
+  auto_route_generator:
   bloc_test:
   build_runner:
   flutter_test:

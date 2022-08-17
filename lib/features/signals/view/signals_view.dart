@@ -1,28 +1,22 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
-import 'package:bloc_vgv_todoapp/core/models/signal_model.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
 import 'package:bloc_vgv_todoapp/core/utils/extensions.dart';
 import 'package:bloc_vgv_todoapp/features/signals/bloc/signals_bloc.dart';
+import 'package:firestore_repository/firestore_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignalsPage extends StatelessWidget {
-  SignalsPage({super.key});
+  const SignalsPage({super.key});
 
-  static Page<dynamic> page() => MaterialPage(child: SignalsPage());
-
-  final _firestoreRepository = FirestoreRepositoryImpl();
+  static Page<dynamic> page() => const MaterialPage(child: SignalsPage());
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: _firestoreRepository,
-      child: BlocProvider<SignalsBloc>(
-        create: (_) =>
-            SignalsBloc(_firestoreRepository)..add(const SignalsEvent()),
-        child: const SignalsView(),
-      ),
+    return BlocProvider<SignalsBloc>(
+      create: (_) => SignalsBloc(context.read<FirestoreRepositoryImpl>())
+        ..add(const SignalsEvent()),
+      child: const SignalsView(),
     );
   }
 }
@@ -40,7 +34,8 @@ class _SignalsViewState extends State<SignalsView> {
   @override
   Widget build(BuildContext context) {
     final _isEmailVerified =
-        context.read<AuthRepository>().currentUser.emailVerified ?? false;
+        context.read<AuthenticationRepository>().currentUser.emailVerified ??
+            false;
 
     return Scaffold(
       appBar: AppBar(
@@ -55,10 +50,10 @@ class _SignalsViewState extends State<SignalsView> {
               ? const SizedBox()
               : Container(
                   height: verificationStatusHeight,
-                  color: Colors.amber,
+                  color: Colors.amber.shade300,
                   child: Center(
                     child: Text(
-                      'Please verify your email address',
+                      'Please check your email to verify your account',
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
                             color: Colors.black,
                           ),

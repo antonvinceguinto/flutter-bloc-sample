@@ -1,14 +1,13 @@
 import 'dart:async';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:bloc_vgv_todoapp/core/models/user_model.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc({required AuthRepository authRepository})
+  AppBloc({required AuthenticationRepository authRepository})
       : _authRepository = authRepository,
         super(
           authRepository.currentUser.isNotEmpty
@@ -23,7 +22,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
-  final AuthRepository _authRepository;
+  final AuthenticationRepository _authRepository;
   StreamSubscription<User>? _userSubscription;
 
   void _onUserChanged(AppUserChanged event, Emitter<AppState> emit) {

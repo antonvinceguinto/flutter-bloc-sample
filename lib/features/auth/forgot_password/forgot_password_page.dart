@@ -1,5 +1,5 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/features/auth/cubit/login_cubit.dart';
 import 'package:bloc_vgv_todoapp/features/auth/widgets/bloc_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LoginCubit(context.read<AuthRepository>()),
+      create: (_) => LoginCubit(context.read<AuthenticationRepository>()),
       child: ForgotPasswordView(),
     );
   }

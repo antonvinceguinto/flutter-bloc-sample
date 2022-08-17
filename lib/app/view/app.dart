@@ -1,8 +1,9 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_vgv_todoapp/app/app_router.gr.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
+import 'package:firestore_repository/firestore_repository.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,17 +13,27 @@ import 'package:google_fonts/google_fonts.dart';
 class App extends StatelessWidget {
   const App({
     super.key,
-    required AuthRepository authRepository,
-  }) : _authRepository = authRepository;
+    required AuthenticationRepository authenticationRepository,
+    required FirestoreRepositoryImpl firestoreRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        _firestoreRepository = firestoreRepository;
 
-  final AuthRepository _authRepository;
+  final AuthenticationRepository _authenticationRepository;
+  final FirestoreRepositoryImpl _firestoreRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: _authRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(
+          value: _authenticationRepository,
+        ),
+        RepositoryProvider.value(
+          value: _firestoreRepository,
+        ),
+      ],
       child: BlocProvider(
-        create: (_) => AppBloc(authRepository: _authRepository),
+        create: (_) => AppBloc(authRepository: _authenticationRepository),
         child: const AppView(),
       ),
     );

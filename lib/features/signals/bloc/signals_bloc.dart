@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_vgv_todoapp/core/models/signal_model.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/firestore/firestore_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firestore_repository/models/signal_model.dart';
+import 'package:firestore_repository/firestore_repository.dart';
 
 part 'signals_event.dart';
 part 'signals_state.dart';

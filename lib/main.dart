@@ -1,8 +1,9 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_vgv_todoapp/app/app.dart';
 import 'package:bloc_vgv_todoapp/bootstrap.dart';
-import 'package:bloc_vgv_todoapp/core/repositories/auth_repository.dart';
 import 'package:bloc_vgv_todoapp/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_repository/firestore_repository.dart';
 import 'package:flutter/widgets.dart';
 
 void main() async {
@@ -12,8 +13,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final authRepository = AuthRepository();
+  final authRepository = AuthenticationRepository();
   await authRepository.user.first;
 
-  await bootstrap(() => App(authRepository: authRepository));
+  await bootstrap(
+    () => App(
+      authenticationRepository: authRepository,
+      firestoreRepository: FirestoreRepositoryImpl(),
+    ),
+  );
 }
