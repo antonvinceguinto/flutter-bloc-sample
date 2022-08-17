@@ -85,7 +85,8 @@ class _AppViewState extends State<AppView> {
           style: ElevatedButton.styleFrom(
             elevation: 0,
             primary: const Color(0xFF0164FF),
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(14),
+            shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),

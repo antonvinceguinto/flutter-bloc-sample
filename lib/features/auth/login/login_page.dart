@@ -64,7 +64,7 @@ class LoginView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/logo.png',
+                    'assets/images/flutter-logo.png',
                     width: 120,
                   ),
                   const SizedBox(height: 20),

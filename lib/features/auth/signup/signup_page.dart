@@ -143,11 +143,22 @@ class SignupView extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 8),
-                      TextButton(
-                        child: const Text('Go Back'),
-                        onPressed: () async {
-                          await AutoRouter.of(context).pop();
-                        },
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent,
+                          ),
+                          onPressed: () {
+                            AutoRouter.of(context).pop();
+                          },
+                          child: Text(
+                            'Go Back',
+                            style: Theme.of(context).textTheme.button!.copyWith(
+                                  color: Colors.blue,
+                                ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
