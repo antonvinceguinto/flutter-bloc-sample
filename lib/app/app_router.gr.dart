@@ -10,11 +10,12 @@
 //
 // ignore_for_file: type=lint
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
 
 import '../features/auth/auth_screens.dart' as _i2;
-import '../features/signals/view/signals_view.dart' as _i3;
+import '../features/dashboard/signals/view/signals_view.dart' as _i3;
 import 'app.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
@@ -36,10 +37,8 @@ class AppRouter extends _i4.RootStackRouter {
           routeData: routeData, child: const _i2.SignupPage());
     },
     SignalsRoute.name: (routeData) {
-      final args = routeData.argsAs<SignalsRouteArgs>(
-          orElse: () => const SignalsRouteArgs());
       return _i4.CupertinoPageX<dynamic>(
-          routeData: routeData, child: _i3.SignalsPage(key: args.key));
+          routeData: routeData, child: const _i3.SignalsPage());
     },
     ForgotPasswordRoute.name: (routeData) {
       return _i4.CupertinoPageX<dynamic>(
@@ -83,23 +82,10 @@ class SignupRoute extends _i4.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.SignalsPage]
-class SignalsRoute extends _i4.PageRouteInfo<SignalsRouteArgs> {
-  SignalsRoute({_i5.Key? key})
-      : super(SignalsRoute.name,
-            path: '/signals-page', args: SignalsRouteArgs(key: key));
+class SignalsRoute extends _i4.PageRouteInfo<void> {
+  const SignalsRoute() : super(SignalsRoute.name, path: '/signals-page');
 
   static const String name = 'SignalsRoute';
-}
-
-class SignalsRouteArgs {
-  const SignalsRouteArgs({this.key});
-
-  final _i5.Key? key;
-
-  @override
-  String toString() {
-    return 'SignalsRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

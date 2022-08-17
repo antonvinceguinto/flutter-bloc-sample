@@ -35,6 +35,8 @@ class AuthenticationRepository {
 
   User currentUser = User.empty;
 
+  bool get isEmailVerified => currentUser.emailVerified ?? false;
+
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.

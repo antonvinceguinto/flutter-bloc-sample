@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_vgv_todoapp/app/app.dart';
 import 'package:bloc_vgv_todoapp/features/auth/auth_screens.dart';
-import 'package:bloc_vgv_todoapp/features/signals/view/signals_view.dart';
+import 'package:bloc_vgv_todoapp/features/dashboard/signals/view/signals_view.dart';
 
 @CupertinoAutoRouter(
   replaceInRouteName: 'Page,Route',
