@@ -34,6 +34,7 @@ class CoinGeckoRepositoryImpl {
       final res = await compute(jsonDecode, response.body);
       return TokenData.fromJson(res);
     } catch (e) {
+      // throw Exception(e);
       throw Exception(e);
     }
   }

@@ -87,6 +87,10 @@ class CryptoTickerView extends StatelessWidget {
         (context.read<CryptoTickerCubit>().state as CryptoTickerLoaded)
             .trendingCoins;
 
+    if (trendingCoins == null) {
+      return const SizedBox();
+    }
+
     return ListView.builder(
       itemCount: trendingCoins.length,
       scrollDirection: Axis.horizontal,

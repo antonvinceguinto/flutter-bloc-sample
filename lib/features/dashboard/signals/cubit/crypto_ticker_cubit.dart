@@ -32,7 +32,7 @@ class CryptoTickerCubit extends Cubit<CryptoTickerState> {
       ]);
       emit(CryptoTickerLoaded(trendingCoins: res));
     } catch (e) {
-      emit(CryptoTickerError(errorMessage: e.toString()));
+      emit(const CryptoTickerError(errorMessage: "Can't load Token Ticker"));
     }
   }
 }
