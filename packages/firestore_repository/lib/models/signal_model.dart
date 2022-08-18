@@ -11,6 +11,9 @@ class Signal {
     required this.imageUrl,
     required this.timestamp,
     required this.price,
+    required this.buyPrice,
+    required this.takeProfit,
+    required this.stopLoss,
     this.isExpired = false,
   });
 
@@ -24,6 +27,9 @@ class Signal {
       timestamp: map['timestamp'] as Timestamp,
       price: map['price'] as int,
       type: map['type'] as String,
+      buyPrice: map['buyPrice'] as int,
+      takeProfit: map['takeProfit'] as int,
+      stopLoss: map['stopLoss'] as int,
     );
   }
 
@@ -35,6 +41,9 @@ class Signal {
   final Timestamp timestamp;
   final bool isExpired;
   final int price;
+  final int buyPrice;
+  final int takeProfit;
+  final int stopLoss;
 
   Signal copyWith({
     required String id,
@@ -44,6 +53,9 @@ class Signal {
     required String type,
     required Timestamp timestamp,
     required int price,
+    required int buyPrice,
+    required int takeProfit,
+    required int stopLoss,
     bool isExpired = false,
   }) {
     return Signal(
@@ -55,6 +67,9 @@ class Signal {
       timestamp: timestamp,
       price: price,
       isExpired: isExpired,
+      buyPrice: buyPrice,
+      takeProfit: takeProfit,
+      stopLoss: stopLoss,
     );
   }
 
@@ -68,6 +83,9 @@ class Signal {
       'isExpired': isExpired,
       'timestamp': timestamp,
       'price': price,
+      'buyPrice': buyPrice,
+      'takeProfit': takeProfit,
+      'stopLoss': stopLoss,
     };
   }
 }

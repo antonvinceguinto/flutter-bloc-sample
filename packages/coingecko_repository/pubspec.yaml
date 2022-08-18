@@ -1,4 +1,4 @@
-name: firestore_repository
+name: coingecko_repository
 description: Dart package which manages the firestore domain.
 version: 1.0.0
 publish_to: none

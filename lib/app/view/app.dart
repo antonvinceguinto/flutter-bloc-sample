@@ -2,8 +2,8 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc_vgv_todoapp/app/app_router.gr.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
-import 'package:bloc_vgv_todoapp/core/utils/colors.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
+import 'package:coingecko_repository/coingecko_repository.dart';
 import 'package:firestore_repository/firestore_repository.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,11 +17,14 @@ class App extends StatelessWidget {
     super.key,
     required AuthenticationRepository authenticationRepository,
     required FirestoreRepositoryImpl firestoreRepository,
+    required CoinGeckoRepositoryImpl coingeckoRepository,
   })  : _authenticationRepository = authenticationRepository,
-        _firestoreRepository = firestoreRepository;
+        _firestoreRepository = firestoreRepository,
+        _coingeckoRepository = coingeckoRepository;
 
   final AuthenticationRepository _authenticationRepository;
   final FirestoreRepositoryImpl _firestoreRepository;
+  final CoinGeckoRepositoryImpl _coingeckoRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider.value(
           value: _firestoreRepository,
+        ),
+        RepositoryProvider.value(
+          value: _coingeckoRepository,
         ),
       ],
       child: BlocProvider(
@@ -62,9 +68,10 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
+        primaryColor: Colors.green,
         scaffoldBackgroundColor: Colors.black,
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(
@@ -84,7 +91,7 @@ class _AppViewState extends State<AppView> {
             color: Colors.white,
           ),
           bodyText2: GoogleFonts.roboto(
-            color: Colors.white,
+            color: Colors.green,
           ),
           subtitle1: GoogleFonts.roboto(
             color: Colors.white,
@@ -96,7 +103,7 @@ class _AppViewState extends State<AppView> {
         appBarTheme: AppBarTheme(
           color: Colors.black,
           titleTextStyle: GoogleFonts.roboto(
-            color: Colors.white,
+            color: Colors.green,
             fontSize: 18,
           ),
         ),
@@ -112,6 +119,9 @@ class _AppViewState extends State<AppView> {
         ),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF0164FF),
+        ),
+        dividerTheme: const DividerThemeData(
+          color: Colors.green,
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(

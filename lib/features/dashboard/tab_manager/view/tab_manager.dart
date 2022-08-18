@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
+import 'package:badges/badges.dart';
+import 'package:bloc_vgv_todoapp/core/utils/helpers.dart';
 import 'package:bloc_vgv_todoapp/features/dashboard/signals/view/signals_view.dart';
 import 'package:bloc_vgv_todoapp/features/dashboard/tab_manager/cubit/index_cubit.dart';
 import 'package:flutter/material.dart';
@@ -83,6 +84,7 @@ class TabManagerView extends StatelessWidget {
                 '200 SC',
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       fontSize: 16,
+                      color: Colors.green,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -94,29 +96,63 @@ class TabManagerView extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.currentIndex != current.currentIndex,
         builder: (context, state) {
-          return BottomNavigationBar(
-            currentIndex: indexCubit.state.currentIndex,
-            onTap: indexCubit.updateIndex,
-            backgroundColor: Colors.black,
-            selectedItemColor: Colors.green,
-            unselectedItemColor: Colors.grey,
-            type: BottomNavigationBarType.fixed,
-            enableFeedback: true,
-            selectedFontSize: 12,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.whatshot_outlined),
-                label: 'Hot',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_outlined),
-                label: 'Profile',
-              ),
-            ],
+          return SizedBox(
+            height: kBottomNavigationBarHeight,
+            child: Column(
+              children: [
+                const Divider(height: 1),
+                Expanded(
+                  child: BottomNavigationBar(
+                    currentIndex: indexCubit.state.currentIndex,
+                    onTap: (i) {
+                      if (i != 0) {
+                        return Sw8Dialog.showOkDialog(
+                          context,
+                          'Coming Soon',
+                          'This feature will be open soon',
+                        );
+                      }
+                    },
+                    backgroundColor: Colors.black,
+                    selectedItemColor: Colors.green,
+                    unselectedItemColor: Colors.grey,
+                    type: BottomNavigationBarType.fixed,
+                    enableFeedback: true,
+                    selectedFontSize: 12,
+                    items: <BottomNavigationBarItem>[
+                      const BottomNavigationBarItem(
+                        icon: Icon(Icons.home_outlined),
+                        label: 'Home',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Badge(
+                          badgeContent: const Icon(
+                            Icons.lock,
+                            color: Colors.red,
+                            size: 19,
+                          ),
+                          badgeColor: Colors.transparent,
+                          child: const Icon(Icons.whatshot_outlined),
+                        ),
+                        label: 'Hot',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Badge(
+                          badgeContent: const Icon(
+                            Icons.lock,
+                            color: Colors.red,
+                            size: 19,
+                          ),
+                          badgeColor: Colors.transparent,
+                          child: const Icon(Icons.account_circle_outlined),
+                        ),
+                        label: 'Profile',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
