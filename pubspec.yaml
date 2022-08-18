@@ -26,6 +26,7 @@ dependencies:
   flutterfire_ui:
   google_fonts:
   google_sign_in_mocks:
+  in_app_purchase:
   intl:
   shimmer:
   tuple:
