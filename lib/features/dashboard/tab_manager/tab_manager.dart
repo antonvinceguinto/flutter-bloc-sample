@@ -34,7 +34,7 @@ class TabManagerView extends StatelessWidget {
     ),
   ];
 
-  static const verificationStatusHeight = 38.0;
+  static const verificationStatusHeight = 30.0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,6 @@ class TabManagerView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: Size(
@@ -66,27 +65,27 @@ class TabManagerView extends StatelessWidget {
                   ),
                 ),
         ),
-        title: Text(
-          'SW8 Signals',
-          style: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
-                color: Colors.black,
+        title: const Text('SW8 Signals'),
+        // leading: IconButton(
+        //   onPressed: () => context.read<AppBloc>().add(
+        //         AppLogoutRequested(),
+        //       ),
+        //   icon: const Icon(
+        //     Icons.exit_to_app,
+        //     color: Colors.red,
+        //   ),
+        // ),
+        actions: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: Text(
+                '200 SC',
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-        ),
-        leading: IconButton(
-          onPressed: () => context.read<AppBloc>().add(
-                AppLogoutRequested(),
-              ),
-          icon: const Icon(
-            Icons.exit_to_app,
-            color: Colors.red,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 18,
-              child: Icon(Icons.person),
             ),
           ),
         ],
@@ -98,6 +97,12 @@ class TabManagerView extends StatelessWidget {
           return BottomNavigationBar(
             currentIndex: indexCubit.state.currentIndex,
             onTap: indexCubit.updateIndex,
+            backgroundColor: Colors.black,
+            selectedItemColor: Colors.green,
+            unselectedItemColor: Colors.grey,
+            type: BottomNavigationBarType.fixed,
+            enableFeedback: true,
+            selectedFontSize: 12,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
@@ -128,3 +133,7 @@ class TabManagerView extends StatelessWidget {
     );
   }
 }
+
+TextStyle get navItemLabelStyle => const TextStyle(
+      fontSize: 12,
+    );

@@ -82,7 +82,6 @@ class LoginView extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline1!.copyWith(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
                           ),
                     ),
                   ),

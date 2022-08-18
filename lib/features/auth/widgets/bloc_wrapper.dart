@@ -24,22 +24,10 @@ InputDecoration customInputDecoration({
 }) {
   return InputDecoration(
     hintText: labelText,
-    // fillColor: Colors.grey[100],
-    // filled: true,
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 16,
       vertical: 8,
     ),
-    icon: Icon(
-      icon,
-      color: Colors.blueGrey.shade400,
-    ),
-    border: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: BorderSide(
-        width: 3,
-        color: Colors.blueGrey.shade400,
-      ),
-    ),
+    icon: Icon(icon),
   );
 }

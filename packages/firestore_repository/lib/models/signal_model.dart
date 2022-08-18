@@ -7,8 +7,10 @@ class Signal {
     required this.id,
     required this.title,
     required this.details,
+    required this.type,
     required this.imageUrl,
     required this.timestamp,
+    required this.price,
     this.isExpired = false,
   });
 
@@ -20,6 +22,8 @@ class Signal {
       imageUrl: map['imageUrl'] as String,
       isExpired: map['isExpired'] as bool,
       timestamp: map['timestamp'] as Timestamp,
+      price: map['price'] as int,
+      type: map['type'] as String,
     );
   }
 
@@ -27,22 +31,30 @@ class Signal {
   final String title;
   final String imageUrl;
   final String details;
+  final String type;
   final Timestamp timestamp;
   final bool isExpired;
+  final int price;
 
   Signal copyWith({
     required String id,
+    required String details,
     required String title,
     required String imageUrl,
+    required String type,
+    required Timestamp timestamp,
+    required int price,
     bool isExpired = false,
   }) {
     return Signal(
       id: id,
       details: details,
       title: title,
+      type: type,
       imageUrl: imageUrl,
-      isExpired: isExpired,
       timestamp: timestamp,
+      price: price,
+      isExpired: isExpired,
     );
   }
 
@@ -51,9 +63,11 @@ class Signal {
       'id': id,
       'details': details,
       'title': title,
+      'type': type,
       'imageUrl': imageUrl,
       'isExpired': isExpired,
       'timestamp': timestamp,
+      'price': price,
     };
   }
 }
