@@ -72,6 +72,7 @@ class LoginView extends StatelessWidget {
                     'SW8 Signals',
                     style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                   ),
                   const SizedBox(height: 60),

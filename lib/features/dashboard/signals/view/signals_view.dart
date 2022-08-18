@@ -58,10 +58,11 @@ class _SignalsViewState extends State<SignalsView> {
                       return Stack(
                         children: [
                           Container(
+                            margin: const EdgeInsets.only(top: 8),
                             padding: const EdgeInsets.only(
                               left: 20,
                               right: 20,
-                              bottom: 20,
+                              bottom: 10,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +161,15 @@ class _SignalsViewState extends State<SignalsView> {
                                                 ),
                                           ),
                                           const SizedBox(height: 4),
-                                          Text(signal.details),
+                                          Text(
+                                            signal.details,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2!
+                                                .copyWith(
+                                                  color: Colors.white,
+                                                ),
+                                          ),
                                         ],
                                       ),
                                     ),

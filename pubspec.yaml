@@ -27,6 +27,7 @@ dependencies:
   google_fonts:
   google_sign_in_mocks:
   intl:
+  shimmer:
   tuple:
 
 dev_dependencies:

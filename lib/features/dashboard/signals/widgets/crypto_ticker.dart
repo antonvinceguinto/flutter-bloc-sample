@@ -2,6 +2,7 @@ import 'package:bloc_vgv_todoapp/features/dashboard/signals/cubit/crypto_ticker_
 import 'package:coingecko_repository/coingecko_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CryptoTicker extends StatelessWidget {
   const CryptoTicker({super.key});
@@ -32,7 +33,7 @@ class CryptoTickerView extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: state is CryptoTickerLoading
-                      ? const CircularProgressIndicator.adaptive()
+                      ? _itemShimmer()
                       : state is CryptoTickerError
                           ? Text(
                               state.errorMessage,
@@ -49,6 +50,35 @@ class CryptoTickerView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _itemShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.white.withOpacity(0.2),
+      highlightColor: Colors.white.withOpacity(0.5),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(
+            4,
+            (index) => Container(
+              height: double.infinity,
+              width: 100,
+              margin: const EdgeInsets.symmetric(
+                horizontal: 5,
+                vertical: 10,
+              ),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
