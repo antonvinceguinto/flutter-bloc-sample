@@ -7,6 +7,7 @@ enum LoginStatus {
   error,
 }
 
+@immutable
 class LoginState extends Equatable {
   const LoginState({
     required this.email,

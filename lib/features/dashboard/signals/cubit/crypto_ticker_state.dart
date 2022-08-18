@@ -1,5 +1,6 @@
 part of 'crypto_ticker_cubit.dart';
 
+@immutable
 class CryptoTickerState extends Equatable {
   const CryptoTickerState();
 

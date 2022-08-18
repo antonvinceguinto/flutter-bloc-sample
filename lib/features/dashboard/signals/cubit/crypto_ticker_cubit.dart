@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:coingecko_repository/coingecko_repository.dart';
 import 'package:coingecko_repository/models/token_data.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part 'crypto_ticker_state.dart';
 

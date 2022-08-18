@@ -1,5 +1,6 @@
 part of 'index_cubit.dart';
 
+@immutable
 class IndexState extends Equatable {
   const IndexState(this.currentIndex);
 
