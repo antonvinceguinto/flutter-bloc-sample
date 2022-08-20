@@ -1,4 +1,3 @@
-import 'package:firestore_repository/models/signal_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

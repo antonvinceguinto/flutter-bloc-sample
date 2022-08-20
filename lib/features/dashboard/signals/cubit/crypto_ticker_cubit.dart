@@ -11,15 +11,16 @@ part 'crypto_ticker_state.dart';
 class CryptoTickerCubit extends Cubit<CryptoTickerState> {
   CryptoTickerCubit({required CoinGeckoRepositoryImpl coinGeckoRepositoryImpl})
       : _coinGeckoRepositoryImpl = coinGeckoRepositoryImpl,
-        super(CryptoTickerLoading()) {
+        super(const CryptoTickerState()) {
     unawaited(loadTicker());
   }
 
   final CoinGeckoRepositoryImpl _coinGeckoRepositoryImpl;
 
   Future<void> loadTicker() async {
-    emit(CryptoTickerLoading());
     try {
+      if (state is CryptoTickerLoading) return;
+      emit(CryptoTickerLoading());
       final res = await _coinGeckoRepositoryImpl.getTokenDataList([
         'bitcoin',
         'ethereum',
@@ -30,7 +31,11 @@ class CryptoTickerCubit extends Cubit<CryptoTickerState> {
         'polkadot',
         'dogecoin',
       ]);
-      emit(CryptoTickerLoaded(trendingCoins: res));
+      if (res != null) {
+        emit(CryptoTickerLoaded(trendingCoins: res));
+      } else {
+        emit(const CryptoTickerError(errorMessage: "Can't load Token Ticker"));
+      }
     } catch (e) {
       emit(const CryptoTickerError(errorMessage: "Can't load Token Ticker"));
     }

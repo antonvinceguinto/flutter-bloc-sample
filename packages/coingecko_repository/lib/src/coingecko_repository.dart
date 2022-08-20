@@ -12,7 +12,7 @@ class CoinGeckoRepositoryImpl {
     return _client.get(Uri.parse('$_baseUrl$path'));
   }
 
-  Future<List<TokenData>> getTokenDataList(List<String> tokenId) async {
+  Future<List<TokenData>?> getTokenDataList(List<String> tokenId) async {
     try {
       List<TokenData> tempList = [];
 
@@ -23,7 +23,7 @@ class CoinGeckoRepositoryImpl {
 
       return tempList;
     } catch (e) {
-      throw Exception(e);
+      return null;
     }
   }
 

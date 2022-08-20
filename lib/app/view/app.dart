@@ -97,7 +97,7 @@ class _AppViewState extends State<AppView> {
           color: Colors.black,
           titleTextStyle: GoogleFonts.roboto(
             color: Colors.green,
-            fontSize: 18,
+            fontSize: 20,
           ),
         ),
         dialogTheme: DialogTheme(

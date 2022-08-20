@@ -46,6 +46,8 @@ class TabManagerView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: false,
+        toolbarHeight: 10,
         bottom: PreferredSize(
           preferredSize: Size(
             double.infinity,
@@ -66,32 +68,26 @@ class TabManagerView extends StatelessWidget {
                   ),
                 ),
         ),
-        title: const Text('SW8 Signals'),
-        // leading: IconButton(
-        //   onPressed: () => context.read<AppBloc>().add(
-        //         AppLogoutRequested(),
-        //       ),
-        //   icon: const Icon(
-        //     Icons.exit_to_app,
-        //     color: Colors.red,
-        //   ),
-        // ),
-        actions: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Text(
-                '200 SC',
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      fontSize: 16,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ),
-          ),
-        ],
       ),
+      //   // leading: IconButton(
+      //   //   onPressed: () => context.read<AppBloc>().add(
+      //   //         AppLogoutRequested(),
+      //   //       ),
+      //   //   icon: const Icon(
+      //   //     Icons.exit_to_app,
+      //   //     color: Colors.red,
+      //   //   ),
+      //   // ),
+      //   actions: const [
+      //     Center(
+      //       child: Padding(
+      //         padding: EdgeInsets.only(right: 16),
+      //         child: SizedBox(),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+
       bottomNavigationBar: BlocBuilder<IndexCubit, IndexState>(
         buildWhen: (previous, current) =>
             previous.currentIndex != current.currentIndex,
@@ -152,7 +148,7 @@ class TabManagerView extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.currentIndex != current.currentIndex,
         builder: (context, state) {
-          return Center(
+          return SafeArea(
             child:
                 _pages.elementAt(context.read<IndexCubit>().state.currentIndex),
           );

@@ -15,10 +15,10 @@ class CryptoTickerLoaded extends CryptoTickerState {
     required this.trendingCoins,
   });
 
-  final List<TokenData> trendingCoins;
+  final List<TokenData>? trendingCoins;
 
   @override
-  List<Object> get props => [trendingCoins];
+  List<Object> get props => [trendingCoins ?? const []];
 }
 
 class CryptoTickerError extends CryptoTickerState {

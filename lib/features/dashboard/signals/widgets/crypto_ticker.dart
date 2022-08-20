@@ -30,9 +30,34 @@ class CryptoTickerView extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return SizedBox(
-          height: 140,
+          height: 200,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Price Updates',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    IconButton(
+                      onPressed: () =>
+                          context.read<CryptoTickerCubit>().loadTicker(),
+                      icon: const Icon(Icons.refresh),
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Center(
                   child: state is CryptoTickerLoading
@@ -90,8 +115,8 @@ class CryptoTickerView extends StatelessWidget {
         (context.read<CryptoTickerCubit>().state as CryptoTickerLoaded)
             .trendingCoins;
 
-    if (trendingCoins == null) {
-      return const SizedBox();
+    if (trendingCoins == null || trendingCoins[0].name == null) {
+      return const Text("Can't load ticker. Try again later.");
     }
 
     return ListView.builder(
@@ -117,7 +142,7 @@ class CryptoTickerView extends StatelessWidget {
           height: double.infinity,
           width: 100,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 '${coin.symbol?.toUpperCase()}',
@@ -125,7 +150,6 @@ class CryptoTickerView extends StatelessWidget {
                       fontWeight: FontWeight.w900,
                     ),
               ),
-              const SizedBox(height: 8),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
@@ -134,7 +158,6 @@ class CryptoTickerView extends StatelessWidget {
                   width: 40,
                 ),
               ),
-              const SizedBox(height: 8),
               Text('\$${coin.marketData?.currentPrice?.usd}'),
             ],
           ),

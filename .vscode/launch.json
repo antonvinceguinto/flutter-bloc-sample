@@ -16,5 +16,19 @@
 				"lib/main.dart"
 			]
 		},
+		{
+			"name": "Anton iphone development",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main.dart",
+			"args": [
+				"--flavor",
+				"development",
+				"-d",
+				"00008020-001A75A80A30003A",
+				"--target",
+				"lib/main.dart"
+			]
+		},
 	]
 }
