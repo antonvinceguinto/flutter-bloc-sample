@@ -30,14 +30,16 @@ class CryptoTickerView extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return SizedBox(
-          height: 200,
+          height: 210,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(
+                  top: 10,
                   left: 10,
                   right: 10,
+                  bottom: 5,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,6 +72,7 @@ class CryptoTickerView extends StatelessWidget {
                           : _tickerList(context),
                 ),
               ),
+              const SizedBox(height: 4),
               const Divider(
                 color: Colors.green,
                 height: 1,

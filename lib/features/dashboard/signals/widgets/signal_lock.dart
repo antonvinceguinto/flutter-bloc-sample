@@ -24,7 +24,7 @@ class SignalLock extends StatelessWidget {
           const Icon(
             Icons.lock_open_outlined,
             color: Colors.green,
-            size: 48,
+            size: 40,
           ),
           const SizedBox(height: 9),
           Container(
@@ -37,7 +37,7 @@ class SignalLock extends StatelessWidget {
               color: Colors.green.withOpacity(0.2),
             ),
             child: Text(
-              'Unlock Signals for ₱120',
+              'Unlock Signals (₱120)',
               style: Theme.of(context)
                   .textTheme
                   .button!

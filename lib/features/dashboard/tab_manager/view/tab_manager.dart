@@ -104,8 +104,9 @@ class TabManagerView extends StatelessWidget {
                   );
                 }
               },
-              backgroundColor: Colors.black,
-              selectedItemColor: Colors.green,
+              backgroundColor: const Color(0xFF121212),
+              selectedItemColor: Colors.white,
+              selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
               unselectedItemColor: Colors.grey,
               type: BottomNavigationBarType.fixed,
               enableFeedback: true,
