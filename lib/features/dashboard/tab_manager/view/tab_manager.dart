@@ -97,59 +97,51 @@ class TabManagerView extends StatelessWidget {
             previous.currentIndex != current.currentIndex,
         builder: (context, state) {
           return SizedBox(
-            height: kBottomNavigationBarHeight,
-            child: Column(
-              children: [
-                const Divider(height: 1),
-                Expanded(
-                  child: BottomNavigationBar(
-                    currentIndex: indexCubit.state.currentIndex,
-                    onTap: (i) {
-                      if (i != 0) {
-                        return Sw8Dialog.showOkDialog(
-                          context,
-                          'Coming Soon',
-                          'This feature will be open soon',
-                        );
-                      }
-                    },
-                    backgroundColor: Colors.black,
-                    selectedItemColor: Colors.green,
-                    unselectedItemColor: Colors.grey,
-                    type: BottomNavigationBarType.fixed,
-                    enableFeedback: true,
-                    selectedFontSize: 12,
-                    items: <BottomNavigationBarItem>[
-                      const BottomNavigationBarItem(
-                        icon: Icon(Icons.home_outlined),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Badge(
-                          badgeContent: const Icon(
-                            Icons.lock,
-                            color: Colors.red,
-                            size: 19,
-                          ),
-                          badgeColor: Colors.transparent,
-                          child: const Icon(Icons.whatshot_outlined),
-                        ),
-                        label: 'Hot',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Badge(
-                          badgeContent: const Icon(
-                            Icons.lock,
-                            color: Colors.red,
-                            size: 19,
-                          ),
-                          badgeColor: Colors.transparent,
-                          child: const Icon(Icons.account_circle_outlined),
-                        ),
-                        label: 'Profile',
-                      ),
-                    ],
+            child: BottomNavigationBar(
+              currentIndex: indexCubit.state.currentIndex,
+              onTap: (i) {
+                if (i != 0) {
+                  return Sw8Dialog.showOkDialog(
+                    context,
+                    'Coming Soon',
+                    'This feature will be open soon',
+                  );
+                }
+              },
+              backgroundColor: Colors.black,
+              selectedItemColor: Colors.green,
+              unselectedItemColor: Colors.grey,
+              type: BottomNavigationBarType.fixed,
+              enableFeedback: true,
+              selectedFontSize: 12,
+              items: <BottomNavigationBarItem>[
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Badge(
+                    badgeContent: const Icon(
+                      Icons.lock,
+                      color: Colors.red,
+                      size: 19,
+                    ),
+                    badgeColor: Colors.transparent,
+                    child: const Icon(Icons.whatshot_outlined),
                   ),
+                  label: 'Hot',
+                ),
+                BottomNavigationBarItem(
+                  icon: Badge(
+                    badgeContent: const Icon(
+                      Icons.lock,
+                      color: Colors.red,
+                      size: 19,
+                    ),
+                    badgeColor: Colors.transparent,
+                    child: const Icon(Icons.account_circle_outlined),
+                  ),
+                  label: 'Profile',
                 ),
               ],
             ),

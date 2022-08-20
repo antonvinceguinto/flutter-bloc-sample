@@ -9,11 +9,14 @@ class CryptoTicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CryptoTickerCubit(
-        coinGeckoRepositoryImpl: context.read<CoinGeckoRepositoryImpl>(),
+    return RepositoryProvider(
+      create: (_) => CoinGeckoRepositoryImpl(),
+      child: BlocProvider(
+        create: (context) => CryptoTickerCubit(
+          coinGeckoRepositoryImpl: context.read<CoinGeckoRepositoryImpl>(),
+        ),
+        child: const CryptoTickerView(),
       ),
-      child: const CryptoTickerView(),
     );
   }
 }
@@ -43,7 +46,7 @@ class CryptoTickerView extends StatelessWidget {
                 ),
               ),
               const Divider(
-                color: Colors.amber,
+                color: Colors.green,
                 height: 1,
               ),
             ],

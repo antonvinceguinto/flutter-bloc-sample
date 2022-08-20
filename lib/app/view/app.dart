@@ -3,7 +3,6 @@ import 'package:bloc_vgv_todoapp/app/app_router.gr.dart';
 import 'package:bloc_vgv_todoapp/core/blocs/app/app_bloc.dart';
 import 'package:bloc_vgv_todoapp/core/configs/routes.dart';
 import 'package:bloc_vgv_todoapp/l10n/l10n.dart';
-import 'package:coingecko_repository/coingecko_repository.dart';
 import 'package:firestore_repository/firestore_repository.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,14 +16,11 @@ class App extends StatelessWidget {
     super.key,
     required AuthenticationRepository authenticationRepository,
     required FirestoreRepositoryImpl firestoreRepository,
-    required CoinGeckoRepositoryImpl coingeckoRepository,
   })  : _authenticationRepository = authenticationRepository,
-        _firestoreRepository = firestoreRepository,
-        _coingeckoRepository = coingeckoRepository;
+        _firestoreRepository = firestoreRepository;
 
   final AuthenticationRepository _authenticationRepository;
   final FirestoreRepositoryImpl _firestoreRepository;
-  final CoinGeckoRepositoryImpl _coingeckoRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +31,6 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider.value(
           value: _firestoreRepository,
-        ),
-        RepositoryProvider.value(
-          value: _coingeckoRepository,
         ),
       ],
       child: BlocProvider(
