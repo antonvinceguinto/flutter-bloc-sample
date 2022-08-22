@@ -7,7 +7,7 @@ class FirestoreRepositoryImpl {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<List<Signal>> retrieveSignals() {
-    return _db.collection('signals').snapshots().map((snapshot) {
+    return _db.collection('signals').limit(5).snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         return Signal.fromMap(doc.data());
       }).toList();

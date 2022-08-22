@@ -11,12 +11,8 @@ class SignalItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
-        bottom: 10,
-      ),
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,7 +22,7 @@ class SignalItem extends StatelessWidget {
               Row(
                 children: [
                   Image.asset(
-                    'assets/images/btc-icon.png',
+                    'assets/images/flutter-logo.png',
                     width: 24,
                     height: 24,
                   ),
@@ -48,20 +44,19 @@ class SignalItem extends StatelessWidget {
                   ),
                 ],
               ),
-              // IconButton(
-              //   onPressed: () {},
-              //   icon: const Icon(
-              //     Icons.lock_open_outlined,
-              //     color: Colors.amber,
-              //   ),
-              // ),
+              Text(
+                signal.isExpired ? 'EXPIRED' : 'ACTIVE',
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                      color: signal.isExpired ? Colors.red : Colors.green,
+                    ),
+              ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: IntrinsicHeight(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   InfoText(
                     'BUY: 23,892',
@@ -86,7 +81,7 @@ class SignalItem extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  color: Colors.grey.shade900,
+                  color: Colors.grey.shade900.withOpacity(0.7),
                 ),
                 padding: const EdgeInsets.all(8),
                 child: Column(
@@ -102,9 +97,16 @@ class SignalItem extends StatelessWidget {
                     Text(
                       signal.details,
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                            color: Colors.white,
+                            color: Colors.white70,
                           ),
                     ),
+                    if (signal.imageUrl.isNotEmpty) ...{
+                      const SizedBox(height: 10),
+                      Image.network(
+                        signal.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    }
                   ],
                 ),
               ),

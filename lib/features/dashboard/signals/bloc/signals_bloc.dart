@@ -8,15 +8,20 @@ part 'signals_state.dart';
 
 class SignalsBloc extends Bloc<SignalsEvent, SignalsState> {
   SignalsBloc(this.firestoreRepositoryImpl) : super(SignalsLoading()) {
-    on<SignalsEvent>((event, emit) async {
-      emit(SignalsLoading());
-      await emit.onEach<List<Signal>>(
-        firestoreRepositoryImpl.retrieveSignals(),
-        onData: (data) {
-          emit(SignalsLoaded(signals: data));
-        },
-      );
-    });
+    on<SignalsEvent>(_onSignalEvent);
   }
   final FirestoreRepositoryImpl firestoreRepositoryImpl;
+
+  Future<void> _onSignalEvent(
+    SignalsEvent event,
+    Emitter<SignalsState> emit,
+  ) async {
+    emit(SignalsLoading());
+    await emit.onEach<List<Signal>>(
+      firestoreRepositoryImpl.retrieveSignals(),
+      onData: (data) {
+        emit(SignalsLoaded(signals: data));
+      },
+    );
+  }
 }

@@ -15,11 +15,7 @@ class InfoText extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 8,
-        horizontal: 16,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade900,
-        borderRadius: BorderRadius.circular(4),
+        horizontal: 8,
       ),
       child: Text(
         label,
